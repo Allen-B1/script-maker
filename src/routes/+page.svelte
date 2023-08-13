@@ -1,41 +1,27 @@
 
 <script lang="ts">
     import anthRoles from '$lib/anth.json';
-    import baseRoles from '$lib/base-patters.json';
-    import baseOfficialRolesArray from '$lib/base-official.json';
+    import pattersRoles from '$lib/base-patters.json';
+    import officialRoles from '$lib/base-official.json';
 
-    const baseOfficialRoles = ((a) => {
+    type Role = { id: string, name: string, edition: string, type: string, ability: string, firstNight?: number, otherNight?: number, image: string };
+
+    const officialRolesRecord = ((a) => {
         let d = {};
         for (let role of a) {
             d[role.id.toLowerCase().replace(/[^A-Za-z0-9]/g, "")] = role;
         }
         return d;
-    })(baseOfficialRolesArray);
+    })(officialRoles);
 
     const anthRoleRecord = {};
     for (let role of anthRoles) {
         anthRoleRecord[role.id] = role;
     }
 
-    const filter = {
-        tb: false,
-        snv: false,
-        bmr: false,
-        exp: false,
-        anth: true,
-
-        name: "",
-
-        type: "all"
-    };
-    const meta = {
-        name: "",
-        author: "",
-    }
-
-    let roles = [];
-    for (let role of baseRoles.data) {
-        if (!baseOfficialRoles[role.id]) continue;
+    let roles: Role[] = [];
+    for (let role of pattersRoles.data) {
+        if (!officialRolesRecord[role.id]) continue;
         roles.push({
             id: role.id,
             name: role.name,
@@ -45,7 +31,7 @@
             ability: role.ability,
             firstNight: role.firstNight,
             otherNight: role.otherNight,
-            image: "https://script.bloodontheclocktower.com" + baseOfficialRoles[role.id].icon.slice(1)
+            image: "https://script.bloodontheclocktower.com" + officialRolesRecord[role.id].icon.slice(1)
         });
     }
     for (let role of anthRoles) {
@@ -60,6 +46,30 @@
             otehrNight: role.otherNight,
             image: role.image
         });
+    }
+
+    const rolesRecord: Record<string, Role> = {};
+    for (let role of roles) {
+        rolesRecord[role.id] = role;
+    }
+    
+    // -- end init --
+
+    const filter = {
+        tb: false,
+        snv: false,
+        bmr: false,
+        exp: false,
+        anth: true,
+
+        name: "",
+
+        type: "all"
+    };
+    
+    const meta = {
+        name: "",
+        author: "",
     }
 
     function applyFilter(role, filter) {
@@ -145,13 +155,17 @@
         let file = fileInput.files[0];
         file.text().then(function(text) {
             let json = JSON.parse(text);
+            let script_ = [];
             for (let role of json) {
                 if (role.id == "_meta") {
                     meta.name = role.name;
                     meta.author = role.author;
+                    continue;
                 }
+
+                script_.push(rolesRecord[role.id]);
             }
-            // TODO
+            script = script_;
         });
     }
 </script>
@@ -350,5 +364,7 @@ main {
         <button on:click={() => exportScript()}>Save</button>
         <button on:click={() => fileInput.click()}>Load</button>
         <input type="file" id="file-input" bind:this={fileInput} accept="application/json" on:change={importScript} style="opacity:0;position:fixed" />
+    
+        <button on:click={() => script=[]}>Clear</button>
     </div>
 </main>
