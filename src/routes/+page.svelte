@@ -9,7 +9,7 @@
     const officialRolesRecord = ((a) => {
         let d = {};
         for (let role of a) {
-            d[role.id.toLowerCase().replace(/[^A-Za-z0-9]/g, "")] = role;
+            d[role.id.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "")] = role;
         }
         return d;
     })(officialRoles);
@@ -21,9 +21,10 @@
 
     let roles: Role[] = [];
     for (let role of pattersRoles.data) {
-        if (!officialRolesRecord[role.id]) continue;
+        let id = role.name.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "");
+        if (!officialRolesRecord[id]) continue;
         roles.push({
-            id: role.id,
+            id: id,
             name: role.name,
             edition: role.edition || "exp",
             type: role.type,
@@ -31,7 +32,7 @@
             ability: role.ability,
             firstNight: role.firstNight,
             otherNight: role.otherNight,
-            image: "https://script.bloodontheclocktower.com" + officialRolesRecord[role.id].icon.slice(1)
+            image: "https://script.bloodontheclocktower.com" + officialRolesRecord[id].icon.slice(1)
         });
     }
     for (let role of anthRoles) {
@@ -162,11 +163,32 @@
                     meta.author = role.author;
                     continue;
                 }
-
+                if (!(role.id in rolesRecord)) {
+                    continue;
+                }
                 script_.push(rolesRecord[role.id]);
             }
             script = script_;
         });
+    }
+
+    function sortScript() {
+        script.sort((a, b) => {
+            let categoryOf = (ability) => 
+                ability.startsWith("You start knowing") ? 0 :
+                ability.startsWith("Each night*") ? 2 : 
+                ability.startsWith("Each night") ? 1 :
+                ability.startsWith("Each day") ? 3 :
+                ability.startsWith("Once per game, at night*") ? 5 :
+                ability.startsWith("Once per game, at night") ? 4 :
+                ability.startsWith("Once per game, during the day") ? 6 : 7;
+
+            let catA = categoryOf(a.ability), catB = categoryOf(b.ability);
+            if (catA != catB) return catA - catB;
+            
+            return a.ability < b.ability ? -1 : a.ability === b.ability ? 0 : 1;
+        });
+        script = script;
     }
 </script>
 
@@ -200,25 +222,33 @@ main {
     display: flex;
     flex-direction: column;
 }
+.filter {
+    display: flex;
+    flex-direction: column;
+}
 .categories {
     overflow: auto;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
+    margin-top: 16px;
 }
+
 .category-name {
     font-size: 16px;
     margin: 0;
-    margin-top: 16px;
     margin-bottom: 8px;
 }
+
 .category-list {
     background: #fff;
     color: #444;
 
     font-weight: bold;
     font-size: 14px;
+    margin-bottom: 16px;
 }
+
 .character {
     display: flex;
     flex-direction: row;
@@ -284,16 +314,46 @@ main {
     text-transform: uppercase;
 }
 
+
+.export-panel {
+    padding: 16px;
+}
+.export-panel fieldset {
+    margin-bottom: 32px;
+}
+
 @media print {
     .roles-panel { display: none; }
     .export-panel { display: none; }
 }
+
+fieldset {
+    padding: 0;
+    border: 0;
+    margin-top: 16px;
+}
+input[type=text] {
+    border: 0;
+    background: #fff;
+    padding: 8px 16px;
+    display: block;
+}
+button {
+    border: 0;
+    background: hsl(220, 70%, 50%);
+    color: #fff;
+    padding: 8px 16px;
+}
+.red {
+    background: hsl(0, 70%, 50%);
+}
+.gray { background: hsl(220, 5%, 50%); }
 </style>
 
 <main>
     <div class="roles-panel">
         <div class="filter">
-            <input type="text" placeholder="Filter by name..." bind:value={filter.name} />
+            <input type="text" placeholder="Filter by name..." bind:value={filter.name} style={"align-self:stretch"} />
             <fieldset>
             Filter by edition:
             <div><input type="checkbox" id="filter-tb" bind:checked={filter.tb}> <label for="filter-tb">Trouble Brewing</label></div>
@@ -360,11 +420,18 @@ main {
         <input type="text" placeholder="Script Name" bind:value={meta.name} />
         <input type="text" placeholder="Author" bind:value={meta.author} />
 
-        <button on:click={() => window.print()}>Export to PDF</button>
-        <button on:click={() => exportScript()}>Save</button>
-        <button on:click={() => fileInput.click()}>Load</button>
-        <input type="file" id="file-input" bind:this={fileInput} accept="application/json" on:change={importScript} style="opacity:0;position:fixed" />
-    
-        <button on:click={() => script=[]}>Clear</button>
+        <fieldset style="display:flex;flex-direction:column;align-items:stretch;gap:8px">
+            <button on:click={() => window.print()} class="gray">Export to PDF</button>
+            <div style="display:flex;flex-direction:row;gap:8px">
+                <button on:click={() => exportScript()} style="flex-grow:1" class="red">Save</button>
+                <button on:click={() => fileInput.click()} style="flex-grow:1">Load</button>
+            </div>
+            <input type="file" id="file-input" bind:this={fileInput} accept="application/json" on:change={importScript} style="opacity:0;position:fixed" />
+        </fieldset>
+
+        <fieldset style="display:flex;flex-direction:column;align-items:stretch;gap:8px">
+            <button on:click={() => script=[]} class="red">Clear</button>
+            <button on:click={sortScript}>Sort by SAO</button>
+        </fieldset>
     </div>
 </main>
