@@ -3,6 +3,7 @@
     import anthRoles from '$lib/anth.json';
     import pattersRoles from '$lib/base-patters.json';
     import officialRoles from '$lib/base-official.json';
+    import { onMount } from 'svelte';
 
     type Role = { id: string, name: string, edition: string, type: string, ability: string, firstNight?: number, otherNight?: number, image: string };
 
@@ -84,9 +85,16 @@
     };
 
     let script = [];
+    onMount(() => {
+        script = JSON.parse(localStorage.getItem("script") || "[]");
+    });
+    $: if (typeof localStorage != "undefined" && script.length != 0) {
+        localStorage.setItem("script", JSON.stringify(script));
+    }
+
 
     function toggleRole(role) {
-        let i = script.indexOf(role);
+        let i = script.find(r => r.id === role.id);
         if (i == -1) {
             script.push(role);
             normalizeScript(script);
@@ -96,7 +104,7 @@
         script = script;
     }
 
-    function calculateLetterSpacing(text: string, target: number): strring{
+    function calculateLetterSpacing(text: string, target: number): string {
         const canvas: HTMLCanvasElement = calculateLetterSpacing.canvas || (calculateLetterSpacing.canvas = document.createElement("canvas"));
         const context = canvas.getContext("2d");
         context.font = "1.5vh 'Times New Roman', Times, serif";
@@ -190,6 +198,22 @@
         });
         script = script;
     }
+
+    // service worker for caching images
+    onMount(() => {
+        if ("serviceWorker" in navigator) {
+            (async () => {
+                let registration = await navigator.serviceWorker.register("/sw.js", {
+                    scope: "/",
+                });
+                console.log(registration.installing, registration.waiting, registration.active);
+            })();
+
+            navigator.serviceWorker.onmessage = function (event) {
+                console.log(event.data);
+            };
+        }
+    });
 </script>
 
 <style>
@@ -316,10 +340,15 @@ main {
 
 
 .export-panel {
+    display: flex;
+    flex-direction: column;
     padding: 16px;
 }
 .export-panel fieldset {
     margin-bottom: 32px;
+}
+.export-panel input[type=text] {
+    align-self: stretch;
 }
 
 @media print {
@@ -379,7 +408,7 @@ button {
                 <div class="category-list">
                     {#each roles as role}
                     {#if role.type == chartype && applyFilter(role, filter)}
-                    <div class="character" class:active={script.includes(role)} on:click={() => toggleRole(role)}>
+                    <div class="character" class:active={!!script.find(r => r.id === role.id)} on:click={() => toggleRole(role)}>
                         <img src={role.image} width="32">
                         <span class="character-name">{role.name}</span>
                     </div>
@@ -426,7 +455,7 @@ button {
                 <button on:click={() => exportScript()} style="flex-grow:1" class="red">Save</button>
                 <button on:click={() => fileInput.click()} style="flex-grow:1">Load</button>
             </div>
-            <input type="file" id="file-input" bind:this={fileInput} accept="application/json" on:change={importScript} style="opacity:0;position:fixed" />
+            <input type="file" id="file-input" bind:this={fileInput} accept="application/json" on:change={importScript} style="opacity:0;position:fixed;top:0;left:0;width:0;height:0;" />
         </fieldset>
 
         <fieldset style="display:flex;flex-direction:column;align-items:stretch;gap:8px">
