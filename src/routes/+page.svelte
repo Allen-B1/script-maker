@@ -74,7 +74,7 @@
         author: "",
     };
     onMount(() => {
-        meta = JSON.parse(localStorage.getItem("meta") || "{}");
+        meta = JSON.parse(localStorage.getItem("meta") || "null") || meta;
     })
     $: if (typeof localStorage !== "undefined" && (meta.name != "" || meta.author != "")) {
         localStorage.setItem("meta", JSON.stringify(meta));
@@ -400,6 +400,9 @@ button {
 .gray { background: hsl(220, 5%, 50%); }
 </style>
 
+<svelte:head>
+    <title>BOTC Script Maker</title>
+</svelte:head>
 <main>
     <div class="roles-panel">
         <div class="filter">
