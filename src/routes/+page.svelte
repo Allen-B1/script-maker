@@ -3,6 +3,7 @@
     import anthRoles from '$lib/anth.json';
     import pattersRoles from '$lib/base-patters.json';
     import officialRoles from '$lib/base-official.json';
+    import baseJinxes from '$lib/base-jinx.json';
     import { onMount } from 'svelte';
 
     type Role = { id: string, name: string, edition: string, type: string, ability: string, firstNight?: number, otherNight?: number, image: string };
@@ -12,10 +13,14 @@
         return !BASE_EDITIONS.has(role.edition);
     }
 
+    function transformBaseRoleId(name: string): string {
+        return name.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "");
+    }
+
     const officialRolesRecord = ((a) => {
         let d = {};
         for (let role of a) {
-            d[role.id.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "")] = role;
+            d[transformBaseRoleId(role.id)] = role;
         }
         return d;
     })(officialRoles);
@@ -27,7 +32,7 @@
 
     let roles: Role[] = [];
     for (let role of pattersRoles.data) {
-        let id = role.name.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "");
+        let id = transformBaseRoleId(role.name);
         if (!officialRolesRecord[id]) continue;
         roles.push({
             id: id,
@@ -58,6 +63,25 @@
     const rolesRecord: Record<string, Role> = {};
     for (let role of roles) {
         rolesRecord[role.id] = role;
+    }
+
+    const jinxes: Record<string, Record<string, string>> = {};
+    for (let role of baseJinxes) {
+        let roleId = transformBaseRoleId(role.id);
+        for (let jinx of role.jinx) {
+            let jinxId = transformBaseRoleId(jinx.id);
+            jinxes[roleId] = jinxes[roleId] || {};
+            jinxes[roleId][jinxId] = jinx.reason;
+        }
+    }
+    for (let role of anthRoles) {
+        if (!role.jinxes) continue;
+        for (let jinx of role.jinxes) {
+            let jinxRole = pattersRoles.data.find(x => x.id == jinx.id);
+            let jinxId = jinxRole ? transformBaseRoleId(jinxRole.name) : jinx.id;
+            jinxes[role.id] = jinxes[role.id] || {};
+            jinxes[role.id][jinxId] = jinx.reason;
+        }
     }
     
     // -- end init --
@@ -341,6 +365,20 @@ main {
     display: inline-block;
 }
 
+.script-role-jinxes {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+
+    bottom: -0.375vh;
+    left: 6vh;
+    z-index: 1;
+}
+.script-role-jinxes img {
+    width: 1.75vh;
+    margin-right: -0.1vh;
+}
+
 .script-type-divider {
     position: relative;
     height: 0.25vh;
@@ -478,10 +516,17 @@ button {
                     on:dragstart={(ev) => {ev.dataTransfer?.setData("application/x.index", ""+idx); ev.dataTransfer?.setData("text/plain", role.name); ev.dataTransfer.dropEffect = "move"}}
                     on:drop={(ev) => onScriptDrop(ev, idx)}
                     on:dragover={(ev) => ev.preventDefault()}>
-                    <img src={role.image} width="32" class:script-role-img-homebrew={isHomebrew(role)}>
+                    <img src={role.image} class:script-role-img-homebrew={isHomebrew(role)} alt={role.name + " icon"}>
                     <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>
                         {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
+                    <div class="script-role-jinxes">
+                    {#each script as role2}
+                        {#if jinxes[role.id] && jinxes[role.id][role2.id]}
+                        <img src={role2.image} alt={role2.name + " jinx"} />
+                        {/if}
+                    {/each}
+                    </div>
                 </div>
             {/if}
             {/each}
