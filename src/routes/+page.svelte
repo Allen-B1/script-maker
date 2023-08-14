@@ -7,6 +7,11 @@
 
     type Role = { id: string, name: string, edition: string, type: string, ability: string, firstNight?: number, otherNight?: number, image: string };
 
+    const BASE_EDITIONS = new Set(["tb", "snv", "bmr", "exp"]);
+    function isHomebrew(role: Role): boolean {
+        return !BASE_EDITIONS.has(role.edition);
+    }
+
     const officialRolesRecord = ((a) => {
         let d = {};
         for (let role of a) {
@@ -151,7 +156,7 @@
             author: meta.author
         }];
         for (let role of script) {
-            if (["tb", "bmr", "snv", "exp"].includes(role.edition)) {
+            if (!isHomebrew(role)) {
                 json.push({id: role.id});
             } else {
                 json.push(anthRoleRecord[role.id]);
@@ -357,7 +362,21 @@ main {
     border-radius: 1vh;
     text-transform: uppercase;
 }
+.script footer {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.25vh;
+    position: absolute;
+    bottom: 1vh;
+    left: 1.5vh;
+    right: 1.5vh;
 
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+}
+.script footer > :first-child {
+    flex-grow: 1;
+}
 
 .export-panel {
     display: flex;
@@ -459,14 +478,21 @@ button {
                     on:dragstart={(ev) => {ev.dataTransfer?.setData("application/x.index", ""+idx); ev.dataTransfer?.setData("text/plain", role.name); ev.dataTransfer.dropEffect = "move"}}
                     on:drop={(ev) => onScriptDrop(ev, idx)}
                     on:dragover={(ev) => ev.preventDefault()}>
-                    <img src={role.image} width="32" class:script-role-img-homebrew={role.edition == "anth"}>
-                    <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>{role.name}</span>
+                    <img src={role.image} width="32" class:script-role-img-homebrew={isHomebrew(role)}>
+                    <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>
+                        {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
                 </div>
             {/if}
             {/each}
             {/if}
         {/each}
+
+        <footer>
+            <span>Based on <i>Blood on the Clocktower</i> by Steven Medway. <strong>Fan-made homebrew content.</strong></span>
+            <span>† - Homebrew character</span>
+            <span>* - Not the first night</span>
+        </footer>
         </div>
     </div>
 
