@@ -510,7 +510,7 @@ button {
         </fieldset>
 
         <fieldset style="display:flex;flex-direction:column;align-items:stretch;gap:8px">
-            <button on:click={() => script=[]} class="red">Clear</button>
+            <button on:click={() => {script=[];meta={name:"",author:""}}} class="red">Clear</button>
             <button on:click={sortScript}>Sort by SAO</button>
         </fieldset>
     </div>
