@@ -69,9 +69,15 @@
         type: "all"
     };
     
-    const meta = {
+    let meta = {
         name: "",
         author: "",
+    };
+    onMount(() => {
+        meta = JSON.parse(localStorage.getItem("meta") || "{}");
+    })
+    $: if (typeof localStorage !== "undefined" && (meta.name != "" || meta.author != "")) {
+        localStorage.setItem("meta", JSON.stringify(meta));
     }
 
     function applyFilter(role, filter) {
@@ -94,8 +100,8 @@
 
 
     function toggleRole(role) {
-        let i = script.find(r => r.id === role.id);
-        if (i == -1) {
+        let i = script.findIndex(r => r.id === role.id);
+        if (i === -1) {
             script.push(role);
             normalizeScript(script);
         } else {
@@ -290,6 +296,18 @@ main {
     height: 100vh;
     background: #fff;
     margin: auto;
+
+    position: relative;
+}
+.script-name {
+    position: absolute;
+    top: 0.7vh;
+    left: 1.5vh;
+
+    font-family:'Times New Roman', Times, serif;
+    font-size: 2.25vh;
+    background: #fff;
+    z-index: 3;
 }
 .script-role {
     font-family:'Times New Roman', Times, serif;
@@ -303,6 +321,8 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    cursor: default;
 }
 .script-role img {
     width: 4vh;
@@ -372,6 +392,7 @@ button {
     background: hsl(220, 70%, 50%);
     color: #fff;
     padding: 8px 16px;
+    cursor: pointer;
 }
 .red {
     background: hsl(0, 70%, 50%);
@@ -422,7 +443,8 @@ button {
 
     <div class="script-panel">
         <div class="script">
-        <div style="height:1vh">&nbsp;</div>
+        <div style="height:1.2vh">&nbsp;</div>
+        <div class="script-name">{meta.name}</div>
         {#each ["townsfolk", "outsider", "minion", "demon"] as type}
             {#if script.find(r => r.type == type)}
             <div class="script-type-divider">
