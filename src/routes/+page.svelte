@@ -619,7 +619,8 @@ button {
             <h3>Unofficial Blood on the Clocktower Script Tool</h3>
             <p>Not an official tool.
                 Artwork & character design of official characters belongs to <a href="https://bloodontheclocktower.com/about-us">The Pandemonium Institute</a>.
-                Artwork & character design of The Bootlegger's Anthology by Icibalus & others. 
+                Artwork & character design of The Bootlegger's Anthology by Icibalus & others.
+                <a href="github.com/allen-B1/script-maker">Source code</a>.</p>
         </footer>
     </div>
 </main>
