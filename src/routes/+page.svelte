@@ -446,12 +446,20 @@ main {
     display: flex;
     flex-direction: column;
     padding: 16px;
+    align-self: stretch;
 }
 .export-panel fieldset {
     margin-bottom: 32px;
 }
 .export-panel input[type=text] {
     align-self: stretch;
+}
+.export-panel footer {
+    color: #fff;
+}
+.export-panel footer > * {
+    margin: 0;
+    margin-top: 8px;
 }
 
 @media print {
@@ -604,5 +612,14 @@ button {
             <button on:click={() => {script=[];meta={name:"",author:""}}} class="red">Clear</button>
             <button on:click={sortScript}>Sort by SAO</button>
         </fieldset>
+
+        <div style="flex-grow:1"></div>
+
+        <footer>
+            <h3>Unofficial Blood on the Clocktower Script Tool</h3>
+            <p>Not an official tool.
+                Artwork & character design of official characters belongs to <a href="https://bloodontheclocktower.com/about-us">The Pandemonium Institute</a>.
+                Artwork & character design of The Bootlegger's Anthology belongs to icibalus. 
+        </footer>
     </div>
 </main>
