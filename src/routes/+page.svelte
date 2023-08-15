@@ -484,7 +484,7 @@ button {
 </style>
 
 <svelte:head>
-    <title>BOTC Script Maker</title>
+    <title>Unofficial Homebrew Script Tool</title>
 </svelte:head>
 <main>
     <div class="roles-panel">
