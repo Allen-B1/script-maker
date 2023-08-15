@@ -6,7 +6,9 @@
     import baseJinxes from '$lib/base-jinx.json';
     import { onMount } from 'svelte';
 
-    type Role = { id: string, name: string, edition: string, type: string, ability: string, firstNight?: number, otherNight?: number, image: string };
+    type CharType = "townsfolk" | "outsider" | "minion" | "demon" | "traveler" | "fabled";
+
+    type Role = { id: string, name: string, edition: string, type: CharType, ability: string, firstNight?: number, otherNight?: number, image: string };
 
     const BASE_EDITIONS = new Set(["tb", "snv", "bmr", "exp"]);
     function isHomebrew(role: Role): boolean {
@@ -159,7 +161,7 @@
     /** Orders script from TF, Outsider, Minion, Demon */
     function normalizeScript(script) {
         script.sort((a, b) => {
-            const types = { "townsfolk": 0, "outsider": 1, "minion": 2, "demon": 3 };
+            const types = { "townsfolk": 0, "outsider": 1, "minion": 2, "demon": 3, "traveler": 4, "fabled": 5 };
             return types[a.type] - types[b.type];
         });
     }
@@ -284,6 +286,15 @@ main {
 .filter {
     display: flex;
     flex-direction: column;
+}
+.filter-type {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+}
+.filter-type > :last-child {
+    grid-row: 1 / span 2;
+    grid-column: 2;
 }
 .categories {
     overflow: auto;
@@ -416,6 +427,21 @@ main {
     flex-grow: 1;
 }
 
+.characters-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 1.5vh;
+
+    position: absolute;
+    bottom: 2.75vh;
+    left: 0;
+    right: 0;
+}
+.characters-footer img {
+    width: 3vh;
+}
+
 .export-panel {
     display: flex;
     flex-direction: column;
@@ -465,25 +491,31 @@ button {
         <div class="filter">
             <input type="text" placeholder="Filter by name..." bind:value={filter.name} style={"align-self:stretch"} />
             <fieldset>
-            Filter by edition:
-            <div><input type="checkbox" id="filter-tb" bind:checked={filter.tb}> <label for="filter-tb">Trouble Brewing</label></div>
-            <div><input type="checkbox" id="filter-bmr" bind:checked={filter.bmr}> <label for="filter-bmr">Bad Moon Rising</label></div>
-            <div><input type="checkbox" id="filter-snv" bind:checked={filter.snv}> <label for="filter-snv">Sects and Violets</label></div>
-            <div><input type="checkbox" id="filter-exp" bind:checked={filter.exp}> <label for="filter-exp">Experimental</label></div>
-            <div><input type="checkbox" id="filter-anth" bind:checked={filter.anth}> <label for="filter-anth">Bootlegger's Anthology</label></div>
+                Filter by edition:
+                <div><input type="checkbox" id="filter-tb" bind:checked={filter.tb}> <label for="filter-tb">Trouble Brewing</label></div>
+                <div><input type="checkbox" id="filter-bmr" bind:checked={filter.bmr}> <label for="filter-bmr">Bad Moon Rising</label></div>
+                <div><input type="checkbox" id="filter-snv" bind:checked={filter.snv}> <label for="filter-snv">Sects and Violets</label></div>
+                <div><input type="checkbox" id="filter-exp" bind:checked={filter.exp}> <label for="filter-exp">Experimental</label></div>
+                <div><input type="checkbox" id="filter-anth" bind:checked={filter.anth}> <label for="filter-anth">Bootlegger's Anthology</label></div>
             </fieldset>
 
-            <fieldset>
-            Filter by type:
-            <div><input type="radio" name="filter-type" id="filter-alltypes" value="all" bind:group={filter.type} /> <label for="filter-alltypes">All</label></div>
-            <div><input type="radio" name="filter-type" id="filter-townsfolk" value="townsfolk" bind:group={filter.type} /> <label for="filter-townsfolk">Townsfolk</label></div>
-            <div><input type="radio" name="filter-type" id="filter-outsider" value="outsider" bind:group={filter.type} /> <label for="filter-outsider">Outsider</label></div>
-            <div><input type="radio" name="filter-type" id="filter-minion" value="minion" bind:group={filter.type} /> <label for="filter-minion">Minion</label></div>
-            <div><input type="radio" name="filter-type" id="filter-demon" value="demon" bind:group={filter.type} /> <label for="filter-demon">Demon</label></div>
+            <fieldset class="filter-type">
+                Filter by type:
+                <div>
+                    <div><input type="radio" name="filter-type" id="filter-alltypes" value="all" bind:group={filter.type} /> <label for="filter-alltypes">All</label></div>
+                    <div><input type="radio" name="filter-type" id="filter-traveler" value="traveler" bind:group={filter.type} /> <label for="filter-traveler">Traveller</label></div>
+                    <div><input type="radio" name="filter-type" id="filter-fabled" value="fabled" bind:group={filter.type} /> <label for="filter-fabled">Fabled</label></div>
+                </div>
+                <div>
+                    <div><input type="radio" name="filter-type" id="filter-townsfolk" value="townsfolk" bind:group={filter.type} /> <label for="filter-townsfolk">Townsfolk</label></div>
+                    <div><input type="radio" name="filter-type" id="filter-outsider" value="outsider" bind:group={filter.type} /> <label for="filter-outsider">Outsider</label></div>
+                    <div><input type="radio" name="filter-type" id="filter-minion" value="minion" bind:group={filter.type} /> <label for="filter-minion">Minion</label></div>
+                    <div><input type="radio" name="filter-type" id="filter-demon" value="demon" bind:group={filter.type} /> <label for="filter-demon">Demon</label></div>
+                </div>
             </fieldset>
         </div>
         <div class="categories">
-            {#each ["townsfolk", "outsider", "minion", "demon"] as chartype}
+            {#each ["townsfolk", "outsider", "minion", "demon", "traveler", "fabled"] as chartype}
             <div class="category">
                 <div class="category-name">{chartype[0].toUpperCase() + chartype.slice(1)}</div>
                 <div class="category-list">
@@ -532,6 +564,20 @@ button {
             {/each}
             {/if}
         {/each}
+
+        {#if script.filter(x => x.type != "fabled" && x.type != "traveler").length < 25}
+        <div class="characters-footer">
+            {#each ["fabled", "traveler"] as type}
+                <div class={"characters-footer-" + type}>
+                {#each script as role}
+                    {#if role.type == type}
+                    <img src={role.image} alt={role.name} />
+                    {/if}
+                {/each}
+                </div>
+            {/each}
+        </div>
+        {/if}
 
         <footer>
             <span>Based on <i>Blood on the Clocktower</i> by Steven Medway. <strong>Fan-made homebrew content.</strong></span>
