@@ -340,6 +340,9 @@ main {
 .character img.anth {
     width: 24px;
     padding: 0 4px; }
+.character img.obscrul {
+    width: 16px;
+    padding: 0 8px; }
 
 .script {
     width: 77vh;
@@ -382,7 +385,10 @@ main {
 }
 .script-role > img.anth {
     width: 3vh;
-    padding: 0 0.5vh;
+    padding: 0 0.5vh; }
+.script-role > img.obscrul {
+    width: 2vh;
+    padding: 0 1vh;
 }
 .script-role > img.homebrew:not(.anth) {
     margin-top: 0.5vh;
@@ -406,9 +412,8 @@ main {
     width: 2vh;
     margin-right: -0.1vh;
 }
-.script-role-jinxes img.anth {
-    width: 1.5vh;
-}
+.script-role-jinxes img.anth { width: 1.5vh; }
+.script-role-jinxes img.obscrul { width: 1vh; }
 
 .script-type-divider {
     position: relative;
@@ -553,7 +558,8 @@ button {
                         class:active={!!script.find(r => r.id === role.id)}
                         on:click={() => toggleRole(role)}
                         title={role.ability}>
-                        <img src={role.image} class:anth={role.edition == "anth"}>
+                        <img src={role.image}
+                            class:anth={role.edition == "anth"} class:obscrul={role.id == "obscrul_the_bootleggers_anthology"}>
                         <span class="character-name">{role.name}</span>
                     </div>
                     {/if}
@@ -579,7 +585,9 @@ button {
                     on:dragstart={(ev) => {ev.dataTransfer?.setData("application/x.index", ""+idx); ev.dataTransfer?.setData("text/plain", role.name); ev.dataTransfer.dropEffect = "move"}}
                     on:drop={(ev) => onScriptDrop(ev, idx)}
                     on:dragover={(ev) => ev.preventDefault()}>
-                    <img src={role.image} class:homebrew={isHomebrew(role)} class:anth={role.edition == "anth"} on:click={() => {script.splice(idx, 1); script=script}} alt={"delete " + role.name} role="button">
+                    <img src={role.image} class:homebrew={isHomebrew(role)}
+                        class:anth={role.edition == "anth"} class:obscrul={role.id == "obscrul_the_bootleggers_anthology"}
+                        on:click={() => {script.splice(idx, 1); script=script}} alt={"delete " + role.name} role="button">
                     <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>
                         {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
@@ -587,7 +595,7 @@ button {
                     {#each script as role2}
                         {#if jinxes[role.id] && jinxes[role.id][role2.id]}
                         <img src={role2.image} alt={role2.name + " jinx"} title={jinxes[role.id][role2.id]}
-                            class:anth={role2.edition == "anth"} />
+                            class:anth={role2.edition == "anth"} class:obscrul={role2.id == "obscrul_the_bootleggers_anthology"} />
                         {/if}
                     {/each}
                     </div>
