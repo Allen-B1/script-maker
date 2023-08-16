@@ -473,7 +473,7 @@
       "id": "highpriestess",
       "name": "High Priestess",
       "type": "townsfolk",
-      "ability": "",
+      "ability": "Each night, learn which player the Storyteller believes you should talk to most.",
       "urls": {
         "token": "/token/highpriestess.png",
         "icon": "/icon/highpriestess.png",
@@ -2595,6 +2595,14 @@
         "icon": "/icon/voudon.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Voudon"
       }
+    },
+
+
+    {
+      "id": "harpy",
+      "name": "Harpy",
+      "type": "minion",
+      "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or both might die."
     }
   ]
 }

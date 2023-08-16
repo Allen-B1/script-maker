@@ -49,6 +49,7 @@
         });
     }
     for (let role of anthRoles) {
+        let raw_role_id = role.id.slice(0, -"_the_bootleggers_anthology".length);
         roles.push({
             id: role.id,
             name: role.name,
@@ -58,8 +59,9 @@
             ability: role.ability,
             firstNight: role.firstNight,
             otehrNight: role.otherNight,
-            image: role.image
+            image: "/anth/" + raw_role_id + ".png"
         });
+        console.log(roles[roles.length-1]);
     }
 
     const rolesRecord: Record<string, Role> = {};
@@ -203,6 +205,9 @@
             let json = JSON.parse(text);
             let script_ = [];
             for (let role of json) {
+                if (typeof role == "string") {
+                    role = {id: role};
+                }
                 if (role.id == "_meta") {
                     meta.name = role.name;
                     meta.author = role.author;
@@ -219,7 +224,8 @@
 
     function sortScript() {
         script.sort((a, b) => {
-            let categoryOf = (ability) => 
+            let categoryOf = (ability, id) => 
+                id == "mezepheles" ? 7 :
                 ability.startsWith("You start knowing") ? 0 :
                 ability.startsWith("Each night*") ? 2 : 
                 ability.startsWith("Each night") ? 1 :
@@ -231,7 +237,7 @@
             let catA = categoryOf(a.ability), catB = categoryOf(b.ability);
             if (catA != catB) return catA - catB;
             
-            return a.ability < b.ability ? -1 : a.ability === b.ability ? 0 : 1;
+            return b.ability.length -  a.ability.length;
         });
         script = script;
     }
@@ -328,8 +334,12 @@ main {
     min-height: 32px;
 }
 .character.active {
-    background: hsl(200, 50%, 85%);
-}
+    background: hsl(200, 50%, 85%); }
+.character img {
+    width: 32px; }
+.character img.anth {
+    width: 24px;
+    padding: 0 4px; }
 
 .script {
     width: 77vh;
@@ -364,11 +374,17 @@ main {
 
     cursor: default;
 }
-.script-role img {
+.script-role > img {
     width: 4vh;
     margin-right: 0.5vh;
+
+    cursor: pointer;
 }
-.script-role-img-homebrew {
+.script-role > img.anth {
+    width: 3vh;
+    padding: 0 0.5vh;
+}
+.script-role > img.homebrew:not(.anth) {
     margin-top: 0.5vh;
 }
 .script-role-name {
@@ -380,14 +396,18 @@ main {
     position: absolute;
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     bottom: -0.375vh;
     left: 6vh;
     z-index: 1;
 }
 .script-role-jinxes img {
-    width: 1.75vh;
+    width: 2vh;
     margin-right: -0.1vh;
+}
+.script-role-jinxes img.anth {
+    width: 1.5vh;
 }
 
 .script-type-divider {
@@ -529,8 +549,11 @@ button {
                 <div class="category-list">
                     {#each roles as role}
                     {#if role.type == chartype && applyFilter(role, filter)}
-                    <div class="character" class:active={!!script.find(r => r.id === role.id)} on:click={() => toggleRole(role)}>
-                        <img src={role.image} width="32">
+                    <div class="character"
+                        class:active={!!script.find(r => r.id === role.id)}
+                        on:click={() => toggleRole(role)}
+                        title={role.ability}>
+                        <img src={role.image} class:anth={role.edition == "anth"}>
                         <span class="character-name">{role.name}</span>
                     </div>
                     {/if}
@@ -556,14 +579,15 @@ button {
                     on:dragstart={(ev) => {ev.dataTransfer?.setData("application/x.index", ""+idx); ev.dataTransfer?.setData("text/plain", role.name); ev.dataTransfer.dropEffect = "move"}}
                     on:drop={(ev) => onScriptDrop(ev, idx)}
                     on:dragover={(ev) => ev.preventDefault()}>
-                    <img src={role.image} class:script-role-img-homebrew={isHomebrew(role)} alt={role.name + " icon"}>
+                    <img src={role.image} class:homebrew={isHomebrew(role)} class:anth={role.edition == "anth"} on:click={() => {script.splice(idx, 1); script=script}} alt={"delete " + role.name} role="button">
                     <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>
                         {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
                     <div class="script-role-jinxes">
                     {#each script as role2}
                         {#if jinxes[role.id] && jinxes[role.id][role2.id]}
-                        <img src={role2.image} alt={role2.name + " jinx"} />
+                        <img src={role2.image} alt={role2.name + " jinx"} title={jinxes[role.id][role2.id]}
+                            class:anth={role2.edition == "anth"} />
                         {/if}
                     {/each}
                     </div>
