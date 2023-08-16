@@ -153,7 +153,7 @@
 
         let widthInVH = width / viewHeight * 100;
         if (widthInVH > target) {
-            const spacing = (widthInVH - target) / text.length;
+            const spacing = (widthInVH - target) / (text.length - 1);
             return "-" + spacing + "vh";
         }
         return 'normal';
@@ -614,11 +614,12 @@ button {
                         class:anth={role.edition == "anth"} class:obscrul={role.id == "obscrul_the_bootleggers_anthology"}
                         on:click={() => {script.splice(idx, 1); script=script}} alt={"Remove " + role.name} role="button">
                     <span class="script-role-name"
-                        style={"letter-spacing: " + calculateLetterSpacing(role.name + (meta.marked == role.id && hasVessel ? " 🕱" : ""), 6.5)}
+                        style={"letter-spacing: " + calculateLetterSpacing(role.name + (isHomebrew(role) ? "†" : "") + (meta.marked == role.id && hasVessel ? " 🕱" : ""), 7.25)}
                         title={role.type == "demon" && script.includes("vessel_the_bootleggers_anthology") ? "Mark " + role.name : ""}
                         class:markable={role.type == "demon" && script.includes("vessel_the_bootleggers_anthology")}
                         on:click={() => {if (role.type == "demon") toggleMarkDemon(role.id)}}>
-                        {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if} {#if meta.marked == role.id && hasVessel}🕱{/if}</span>
+                        {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}
+                        {#if meta.marked == role.id && hasVessel}🕱{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
                     <div class="script-role-jinxes">
                     {#each script as role2Id}
