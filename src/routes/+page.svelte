@@ -684,7 +684,7 @@ button {
             <p>Not an official tool.
                 Artwork & character design of official characters belongs to <a href="https://bloodontheclocktower.com/about-us">The Pandemonium Institute</a>.
                 Artwork & character design of The Bootlegger's Anthology by Icibalus & others.
-                <a href="github.com/allen-B1/script-maker">Source code</a>.</p>
+                <a href="https://github.com/allen-B1/script-maker">Source code</a>.</p>
         </footer>
     </div>
 </main>
