@@ -636,7 +636,7 @@ button {
             {/if}
         {/each}
 
-        {#if script.filter(x => x.type != "fabled" && x.type != "traveler").length < 25}
+        {#if script.filter(r => !["traveler", "fabled"].includes(rolesRecord[r].type)).length < 25}
         <div class="characters-footer">
             {#each ["fabled", "traveler"] as type}
                 <div class={"characters-footer-" + type}>
