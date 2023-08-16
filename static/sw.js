@@ -4,7 +4,7 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
     console.log("fetch event");
-    if (event.request.url.startsWith("https://script.bloodontheclocktower.com") || event.request.url.startsWith("https://www.bloodstar.xyz")) {    
+    if (event.request.url.startsWith("https://script.bloodontheclocktower.com") || event.request.url.startsWith("https://www.bloodstar.xyz") || (event.request.url.contains("/anth/") && event.request.url.endsWith(".png"))) {
         let f = (async () => {
             let resp = await caches.match(event.request);
             if (!resp) {
