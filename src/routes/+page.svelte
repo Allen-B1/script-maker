@@ -61,7 +61,6 @@
             otehrNight: role.otherNight,
             image: "/anth/" + raw_role_id + ".png"
         });
-        console.log(roles[roles.length-1]);
     }
 
     const rolesRecord: Record<string, Role> = {};
@@ -105,6 +104,7 @@
     let meta = {
         name: "",
         author: "",
+        marked: null, // arbitrary if no vessel
     };
     onMount(() => {
         meta = JSON.parse(localStorage.getItem("meta") || "null") || meta;
@@ -123,19 +123,18 @@
             (filter.type == role.type || filter.type == "all");
     };
 
-    let script = [];
+    let script: string[] = [];
     onMount(() => {
-        script = JSON.parse(localStorage.getItem("script") || "[]");
+        script = JSON.parse(localStorage.getItem("script") || "[]").filter(r => typeof r == "string" && r in rolesRecord);
     });
     $: if (typeof localStorage != "undefined" && script.length != 0) {
         localStorage.setItem("script", JSON.stringify(script));
     }
 
-
-    function toggleRole(role) {
-        let i = script.findIndex(r => r.id === role.id);
+    function toggleRole(role: Role) {
+        let i = script.indexOf(role.id);
         if (i === -1) {
-            script.push(role);
+            script.push(role.id);
             normalizeScript(script);
         } else {
             script.splice(i, 1);
@@ -162,7 +161,9 @@
 
     /** Orders script from TF, Outsider, Minion, Demon */
     function normalizeScript(script) {
-        script.sort((a, b) => {
+        script.sort((a_, b_) => {
+            let a = rolesRecord[a_],
+                b = rolesRecord[b_];
             const types = { "townsfolk": 0, "outsider": 1, "minion": 2, "demon": 3, "traveler": 4, "fabled": 5 };
             return types[a.type] - types[b.type];
         });
@@ -178,17 +179,18 @@
     }
 
     function exportScript() {
-        let json = [{
+        let json: object[] = [{
             id: "_meta",
             name: meta.name,
             author: meta.author
         }];
-        for (let role of script) {
-            if (!isHomebrew(role)) {
-                json.push({id: role.id});
-            } else {
-                json.push(anthRoleRecord[role.id]);
-            }
+        if (meta.marked && script.includes("vessel_the_bootleggers_anthology")) {
+            json[0].vesselMarked = meta.marked;
+        }
+        for (let roleId of script) {
+            const role = rolesRecord[roleId];
+            let obj = isHomebrew(role) ? anthRoleRecord[role.id] : {id: role.id};
+            json.push(obj);
         }
 
         let a = document.createElement("a");
@@ -202,6 +204,8 @@
     function importScript() {
         let file = fileInput.files[0];
         file.text().then(function(text) {
+            clearScript();
+
             let json = JSON.parse(text);
             let script_ = [];
             for (let role of json) {
@@ -211,20 +215,24 @@
                 if (role.id == "_meta") {
                     meta.name = role.name;
                     meta.author = role.author;
+                    if (role.vesselMarked)
+                       meta.marked = role.vesselMarked;
                     continue;
                 }
                 if (!(role.id in rolesRecord)) {
                     continue;
                 }
-                script_.push(rolesRecord[role.id]);
+                script_.push(role.id);
             }
             script = script_;
         });
     }
 
     function sortScript() {
-        script.sort((a, b) => {
-            let categoryOf = (ability, id) => 
+        script.sort((a_, b_) => {
+            let a = rolesRecord[a_],
+                b = rolesRecord[b_];
+            let categoryOf = (ability: string, id: string) => 
                 id == "mezepheles" ? 7 :
                 ability.startsWith("You start knowing") ? 0 :
                 ability.startsWith("Each night*") ? 2 : 
@@ -234,7 +242,7 @@
                 ability.startsWith("Once per game, at night") ? 4 :
                 ability.startsWith("Once per game, during the day") ? 6 : 7;
 
-            let catA = categoryOf(a.ability), catB = categoryOf(b.ability);
+            let catA = categoryOf(a.ability, a.id), catB = categoryOf(b.ability, b.id);
             if (catA != catB) return catA - catB;
             
             return b.ability.length -  a.ability.length;
@@ -257,6 +265,19 @@
             };
         }
     });
+
+    function toggleMarkDemon(roleId: string) {
+        if (meta.marked == roleId) {
+            meta.marked = null;
+        } else {
+            meta.marked = roleId;
+        }
+    }
+
+    function clearScript() {
+        script = [];
+        meta = { author: "", name: "", marked: null };
+    }
 </script>
 
 <style>
@@ -395,8 +416,9 @@ main {
 }
 .script-role-name {
     width: 8vh;
-    display: inline-block;
-}
+    display: inline-block; }
+.script-role-name.markable {
+    cursor: pointer; }
 
 .script-role-jinxes {
     position: absolute;
@@ -555,7 +577,7 @@ button {
                     {#each roles as role}
                     {#if role.type == chartype && applyFilter(role, filter)}
                     <div class="character"
-                        class:active={!!script.find(r => r.id === role.id)}
+                        class:active={script.includes(role.id)}
                         on:click={() => toggleRole(role)}
                         title={role.ability}>
                         <img src={role.image}
@@ -575,24 +597,32 @@ button {
         <div style="height:1.2vh">&nbsp;</div>
         <div class="script-name">{meta.name}</div>
         {#each ["townsfolk", "outsider", "minion", "demon"] as type}
-            {#if script.find(r => r.type == type)}
+            {#if script.find(r => rolesRecord[r] && rolesRecord[r].type == type)}
             <div class="script-type-divider">
                 <span class="script-type">{type[0].toUpperCase() + type.slice(1)}</span>
             </div>
-            {#each script as role, idx}
+            {@const hasVessel = script.includes("vessel_the_bootleggers_anthology")}
+            {#each script as roleId, idx}
+            {@const role = rolesRecord[roleId]}
             {#if role.type == type}
                 <div class="script-role" draggable={true} 
                     on:dragstart={(ev) => {ev.dataTransfer?.setData("application/x.index", ""+idx); ev.dataTransfer?.setData("text/plain", role.name); ev.dataTransfer.dropEffect = "move"}}
                     on:drop={(ev) => onScriptDrop(ev, idx)}
                     on:dragover={(ev) => ev.preventDefault()}>
                     <img src={role.image} class:homebrew={isHomebrew(role)}
+                        title={"Remove " + role.name}
                         class:anth={role.edition == "anth"} class:obscrul={role.id == "obscrul_the_bootleggers_anthology"}
-                        on:click={() => {script.splice(idx, 1); script=script}} alt={"delete " + role.name} role="button">
-                    <span class="script-role-name" style={"letter-spacing: " + calculateLetterSpacing(role.name, 7)}>
-                        {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if}</span>
+                        on:click={() => {script.splice(idx, 1); script=script}} alt={"Remove " + role.name} role="button">
+                    <span class="script-role-name"
+                        style={"letter-spacing: " + calculateLetterSpacing(role.name + (meta.marked == role.id && hasVessel ? " 🕱" : ""), 6.5)}
+                        title={role.type == "demon" && script.includes("vessel_the_bootleggers_anthology") ? "Mark " + role.name : ""}
+                        class:markable={role.type == "demon" && script.includes("vessel_the_bootleggers_anthology")}
+                        on:click={() => {if (role.type == "demon") toggleMarkDemon(role.id)}}>
+                        {role.name}{#if isHomebrew(role)}<sup>†</sup>{/if} {#if meta.marked == role.id && hasVessel}🕱{/if}</span>
                     <span class="script-role-ability" style={"letter-spacing: " + calculateLetterSpacing(role.ability, 61)}>{role.ability}</span>
                     <div class="script-role-jinxes">
-                    {#each script as role2}
+                    {#each script as role2Id}
+                        {@const role2 = rolesRecord[role2Id]}
                         {#if jinxes[role.id] && jinxes[role.id][role2.id]}
                         <img src={role2.image} alt={role2.name + " jinx"} title={jinxes[role.id][role2.id]}
                             class:anth={role2.edition == "anth"} class:obscrul={role2.id == "obscrul_the_bootleggers_anthology"} />
@@ -609,7 +639,8 @@ button {
         <div class="characters-footer">
             {#each ["fabled", "traveler"] as type}
                 <div class={"characters-footer-" + type}>
-                {#each script as role}
+                {#each script as roleId}
+                    {@const role = rolesRecord[roleId]}
                     {#if role.type == type}
                     <img src={role.image} alt={role.name} />
                     {/if}
@@ -641,7 +672,7 @@ button {
         </fieldset>
 
         <fieldset style="display:flex;flex-direction:column;align-items:stretch;gap:8px">
-            <button on:click={() => {script=[];meta={name:"",author:""}}} class="red">Clear</button>
+            <button on:click={clearScript} class="red">Clear</button>
             <button on:click={sortScript}>Sort by SAO</button>
         </fieldset>
 
