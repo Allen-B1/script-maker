@@ -487,6 +487,7 @@ main {
 }
 .characters-footer img {
     width: 3vh;
+    cursor: pointer;
 }
 
 .export-panel {
@@ -640,10 +641,10 @@ button {
         <div class="characters-footer">
             {#each ["fabled", "traveler"] as type}
                 <div class={"characters-footer-" + type}>
-                {#each script as roleId}
+                {#each script as roleId, idx}
                     {@const role = rolesRecord[roleId]}
                     {#if role.type == type}
-                    <img src={role.image} alt={role.name} />
+                    <img src={role.image} alt={role.name} role="button" on:click={() => {script.splice(idx, 1); script=script}} />
                     {/if}
                 {/each}
                 </div>
