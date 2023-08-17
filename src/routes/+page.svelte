@@ -245,7 +245,7 @@
             let catA = categoryOf(a.ability, a.id), catB = categoryOf(b.ability, b.id);
             if (catA != catB) return catA - catB;
             
-            return b.ability.length -  a.ability.length;
+            return a.ability.length -  b.ability.length;
         });
         script = script;
     }
