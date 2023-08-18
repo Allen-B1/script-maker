@@ -875,6 +875,17 @@
       }
     },
     {
+      "id": "president",
+      "name": "President",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/president.png",
+        "icon": "/icon/president.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/President"
+      }
+    },
+    {
       "id": "professor",
       "name": "Professor",
       "type": "townsfolk",
@@ -1628,6 +1639,17 @@
       }
     },
     {
+      "id": "harpy",
+      "name": "Harpy",
+      "type": "minion",
+      "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or both might die.",
+      "urls": {
+        "token": "/token/harpy.png",
+        "icon": "/icon/harpy.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Harpy"
+      }
+    },
+    {
       "id": "marionette",
       "name": "Marionette",
       "type": "minion",
@@ -1885,6 +1907,17 @@
         "token": "/token/fanggu.png",
         "icon": "/icon/fanggu.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Fang Gu"
+      }
+    },
+    {
+      "id": "hivemind",
+      "name": "Hivemind",
+      "type": "demon",
+      "ability": "",
+      "urls": {
+        "token": "/token/hivemind.png",
+        "icon": "/icon/hivemind.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Hivemind"
       }
     },
     {
@@ -2595,14 +2628,6 @@
         "icon": "/icon/voudon.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Voudon"
       }
-    },
-
-
-    {
-      "id": "harpy",
-      "name": "Harpy",
-      "type": "minion",
-      "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or both might die."
     }
   ]
 }
