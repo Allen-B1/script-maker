@@ -799,7 +799,16 @@
 		"icon": "./images/icon/4 - Experimental/outsider/Heretic_icon.png?t=456",
 		"version": "4 - Experimental",
 		"isDisabled": false
-	},	
+	},
+	{
+		"id": "Plague Doctor",
+		"name": "Plague Doctor",
+		"roleType": "outsider",
+		"print": "./images/print/4 - Experimental/outsider/Plague Doctor_print.png?t=456",
+		"icon": "./images/icon/4 - Experimental/outsider/Plague Doctor_icon.png?t=456",
+		"version": "4 - Experimental",
+		"isDisabled": false
+	},
 	{
 		"id": "Politician",
 		"name": "Politician",

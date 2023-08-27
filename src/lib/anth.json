@@ -1,7 +1,7 @@
-﻿[
+[
     {
         "id": "_meta",
-        "name": "The Bootlegger's Anthology - work in progress - v.0.3.4",
+        "name": "The Bootlegger's Anthology - work in progress - v.0.3.5",
         "author": "Icibalus",
         "logo": "https://www.bloodstar.xyz/p/Elluna/The_Bootleggers_Anthology/_meta.png",
         "almanac": "https://www.bloodstar.xyz/p/Elluna/The_Bootleggers_Anthology/almanac.html"
@@ -198,7 +198,7 @@
         "otherNight": 59.5,
         "sao": [
             1,
-            1,
+            2,
             123
         ]
     },
@@ -898,6 +898,12 @@
             3,
             6,
             96
+        ],
+        "jinxes": [
+            {
+                "id": "plaguedoctor",
+                "reason": "If the Plague Doctor dies, a living Minion gains the Wight ability in addition to their own ability, and learns this."
+            }
         ]
     },
     {
@@ -922,6 +928,10 @@
             {
                 "id": "widow",
                 "reason": "Only 1 jinxed character can be in play."
+            },
+            {
+                "id": "plaguedoctor",
+                "reason": "If the Plague Doctor dies, a living Minion gains the Visionary ability in addition to their own ability, and learns this."
             }
         ],
         "sao": [
@@ -1112,6 +1122,10 @@
             {
                 "id": "zombuul",
                 "reason": "The Vessel only becomes the marked Demon when the Zombuul truly dies."
+            },
+            {
+                "id": "plaguedoctor",
+                "reason": "If the Plague Doctor dies, a living Minion gains the Vessel ability in addition to their own ability, and learns this."
             }
         ],
         "sao": [
@@ -1140,6 +1154,12 @@
             3,
             6,
             139
+        ],
+        "jinxes": [
+            {
+                "id": "plaguedoctor",
+                "reason": "If the Plague Doctor dies, a living Minion gains the Wind Nymph ability in addition to their own ability, and learns this."
+            }
         ]
     },
     {
