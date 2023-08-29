@@ -2628,6 +2628,12 @@
         "icon": "/icon/voudon.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Voudon"
       }
+    },
+    {
+      "id": "plague_doctor",
+      "name": "Plague Doctor",
+      "type": "outsider",
+      "ability": "If you die, the Storyteller gains a not-in-play Minion ability."
     }
   ]
 }
