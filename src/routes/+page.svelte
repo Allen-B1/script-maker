@@ -16,13 +16,13 @@
     }
 
     function transformBaseRoleId(name: string): string {
-        return name.toLowerCase().replace(/\s+/g, "_").replace(/[^A-Za-z0-9_\-]/g, "");
+        return name.toLowerCase().replace(/\s+/g, "").replace(/[^A-Za-z0-9_\-]/g, "");
     }
 
     const officialRolesRecord = ((a) => {
         let d = {};
         for (let role of a) {
-            d[transformBaseRoleId(role.id)] = role;
+            d[transformBaseRoleId(role.name)] = role;
         }
         return d;
     })(officialRoles);
@@ -45,7 +45,7 @@
             ability: role.ability,
             firstNight: role.firstNight,
             otherNight: role.otherNight,
-            image: "https://script.bloodontheclocktower.com" + officialRolesRecord[id].icon.slice(1)
+            image: "/base" + officialRolesRecord[id].icon.slice(1)
         });
     }
     for (let role of anthRoles) {

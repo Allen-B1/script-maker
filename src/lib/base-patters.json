@@ -2,6 +2,23 @@
   "error": false,
   "data": [
     {
+      "id": "acrobat",
+      "name": "Acrobat",
+      "type": "townsfolk",
+      "ability": "Each night*, if either good living neighbour is drunk or poisoned, you die.",
+      "otherNight": 39,
+      "otherNightReminder": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
+      "reminderTokens": [
+        "Dead"
+      ],
+      "urls": {
+        "interactions": "/interactions/acrobat",
+        "token": "/token/acrobat.png",
+        "icon": "/icon/acrobat.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Acrobat"
+      }
+    },
+    {
       "id": "alchemist",
       "name": "Alchemist",
       "type": "townsfolk",
@@ -16,6 +33,17 @@
         "token": "/token/alchemist.png",
         "icon": "/icon/alchemist.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Alchemist"
+      }
+    },
+    {
+      "id": "alsaahir",
+      "name": "Alsaahir",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/alsaahir.png",
+        "icon": "/icon/alsaahir.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Alsaahir"
       }
     },
     {
@@ -86,6 +114,68 @@
       }
     },
     {
+      "id": "banshee",
+      "name": "Banshee",
+      "type": "townsfolk",
+      "ability": "If the Demon kills you, all players learn this. From now on, you may nominate twice per day and vote twice per nomination.",
+      "urls": {
+        "token": "/token/banshee.png",
+        "icon": "/icon/banshee.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Banshee"
+      }
+    },
+    {
+      "id": "beaker",
+      "name": "Beaker",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "If you were non-verbal day one, that night you learn the characters of players who were nonverbal (up to 4) +1 character which is not in play.",
+      "firstNightReminder": "Show up to 5 character tokens",
+      "reminderTokens": [
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal",
+        "Non-verbal"
+      ],
+      "urls": {
+        "token": "/token/beaker.png",
+        "icon": "/icon/beaker.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Beaker"
+      }
+    },
+    {
+      "id": "bellringer",
+      "name": "Bell-Ringer",
+      "type": "townsfolk",
+      "urls": {
+        "token": "/token/bellringer.png",
+        "icon": "/icon/bellringer.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Bell-Ringer"
+      }
+    },
+    {
+      "id": "bosun",
+      "name": "Bosun",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/bosun.png",
+        "icon": "/icon/bosun.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Bosun"
+      }
+    },
+    {
       "id": "bountyhunter",
       "name": "Bounty Hunter",
       "type": "townsfolk",
@@ -102,6 +192,35 @@
         "token": "/token/bountyhunter.png",
         "icon": "/icon/bountyhunter.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Bounty Hunter"
+      }
+    },
+    {
+      "id": "bunsenhoneydew",
+      "name": "Bunsen Honeydew",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "You start knowing how many characters there are in play who can create humans.",
+      "firstNightReminder": "Give a finger signal",
+      "urls": {
+        "token": "/token/bunsenhoneydew.png",
+        "icon": "/icon/bunsenhoneydew.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Bunsen Honeydew"
+      }
+    },
+    {
+      "id": "camillathechicken",
+      "name": "Camilla",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, if a player died by execution today: you learn a player of their alignment.",
+      "otherNightReminder": "Show a player",
+      "reminderTokens": [
+        "Executed Today"
+      ],
+      "urls": {
+        "token": "/token/camillathechicken.png",
+        "icon": "/icon/camillathechicken.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Camilla"
       }
     },
     {
@@ -219,6 +338,19 @@
         "token": "/token/cultleader.png",
         "icon": "/icon/cultleader.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Cult Leader"
+      }
+    },
+    {
+      "id": "drteeth",
+      "name": "Dr. Teeth",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "If you are killed by the demon, a human becomes a townsfolk, you learn who.",
+      "otherNightReminder": "If Dr. Teeth was killed by the demon tonight, remove the human reminder token from a player, show them the player.",
+      "urls": {
+        "token": "/token/drteeth.png",
+        "icon": "/icon/drteeth.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Dr. Teeth"
       }
     },
     {
@@ -386,6 +518,22 @@
       }
     },
     {
+      "id": "fozziebear",
+      "name": "Fozzie Bear",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each day, you may make a public joke. Waka waka. Tonight, you learn if it was true.",
+      "otherNightReminder": "Nod if a *True* reminder was placed today.",
+      "reminderTokens": [
+        "True"
+      ],
+      "urls": {
+        "token": "/token/fozziebear.png",
+        "icon": "/icon/fozziebear.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Fozzie Bear"
+      }
+    },
+    {
       "id": "gambler",
       "name": "Gambler",
       "type": "townsfolk",
@@ -473,7 +621,7 @@
       "id": "highpriestess",
       "name": "High Priestess",
       "type": "townsfolk",
-      "ability": "Each night, learn which player the Storyteller believes you should talk to most.",
+      "ability": "",
       "urls": {
         "token": "/token/highpriestess.png",
         "icon": "/icon/highpriestess.png",
@@ -520,6 +668,17 @@
       }
     },
     {
+      "id": "inquisitor",
+      "name": "Inquisitor",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/inquisitor.png",
+        "icon": "/icon/inquisitor.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Inquisitor"
+      }
+    },
+    {
       "id": "investigator",
       "name": "Investigator",
       "type": "townsfolk",
@@ -555,6 +714,19 @@
         "token": "/token/juggler.png",
         "icon": "/icon/juggler.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Juggler"
+      }
+    },
+    {
+      "id": "kermitthefrog",
+      "name": "Kermit the Frog",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, choose a player (not yourself): if they are a human they become a townsfolk.",
+      "otherNightReminder": "If Kermit selected a human, remove the human reminder token. If Miss Piggy is in play instead add a human reminder token",
+      "urls": {
+        "token": "/token/kermitthefrog.png",
+        "icon": "/icon/kermitthefrog.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Kermit the Frog"
       }
     },
     {
@@ -771,6 +943,17 @@
       }
     },
     {
+      "id": "nomad",
+      "name": "Nomad",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/nomad.png",
+        "icon": "/icon/nomad.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Nomad"
+      }
+    },
+    {
       "id": "oracle",
       "name": "Oracle",
       "type": "townsfolk",
@@ -795,6 +978,19 @@
         "token": "/token/pacifist.png",
         "icon": "/icon/pacifist.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Pacifist"
+      }
+    },
+    {
+      "id": "pepetheprawn",
+      "name": "Pepe the Prawn",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "You start knowing which demon is in play.",
+      "firstNightReminder": "Show the Demon character token.",
+      "urls": {
+        "token": "/token/pepetheprawn.png",
+        "icon": "/icon/pepetheprawn.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Pepe the Prawn"
       }
     },
     {
@@ -921,6 +1117,39 @@
       }
     },
     {
+      "id": "rizzotherat",
+      "name": "Rizzo the Rat",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, choose a player: if they are killed tonight you learn their character.",
+      "otherNightReminder": "Rizzo chooses a player. Wake them again if that player dies tonight.",
+      "reminderTokens": [
+        "Chosen"
+      ],
+      "urls": {
+        "token": "/token/rizzotherat.png",
+        "icon": "/icon/rizzotherat.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Rizzo the Rat"
+      }
+    },
+    {
+      "id": "rowlfthedog",
+      "name": "Rowlf the Dog",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "You start knowing 2 players who are not townsfolk.",
+      "firstNightReminder": "Point to two players who are not townsfolk",
+      "reminderTokens": [
+        "Not Townsfolk",
+        "Not Townsfolk"
+      ],
+      "urls": {
+        "token": "/token/rowlfthedog.png",
+        "icon": "/icon/rowlfthedog.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Rowlf the Dog"
+      }
+    },
+    {
       "id": "sage",
       "name": "Sage",
       "type": "townsfolk",
@@ -957,6 +1186,20 @@
       }
     },
     {
+      "id": "samtheeagle",
+      "name": "Sam the Eagle",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night you learn how many steps a living evil is from you. [+1 Human]",
+      "firstNightReminder": "Give a finger signal",
+      "otherNightReminder": "Give a finger signal",
+      "urls": {
+        "token": "/token/samtheeagle.png",
+        "icon": "/icon/samtheeagle.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Sam the Eagle"
+      }
+    },
+    {
       "id": "savant",
       "name": "Savant",
       "type": "townsfolk",
@@ -985,6 +1228,17 @@
         "token": "/token/seamstress.png",
         "icon": "/icon/seamstress.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Seamstress"
+      }
+    },
+    {
+      "id": "shugenja",
+      "name": "Shugenja",
+      "type": "townsfolk",
+      "ability": "You start knowing if your closest evil player is clockwise or anti-clockwise. If equidistant, this info is arbitrary.",
+      "urls": {
+        "token": "/token/shugenja.png",
+        "icon": "/icon/shugenja.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Shugenja"
       }
     },
     {
@@ -1054,6 +1308,42 @@
       }
     },
     {
+      "id": "swedishchef",
+      "name": "Swedish Chef",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, you learn if there are more or less humans than last night. If you were non-verbal day 1, you instead learn how many humans are in play.",
+      "otherNightReminder": "Give a finger signal (up, down, or number)",
+      "reminderTokens": [
+        "Non-verbal"
+      ],
+      "urls": {
+        "token": "/token/swedishchef.png",
+        "icon": "/icon/swedishchef.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Swedish Chef"
+      }
+    },
+    {
+      "id": "sweetums",
+      "name": "Sweetums",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, you learn how many evil players voted.",
+      "otherNightReminder": "Give a finger signal",
+      "reminderTokens": [
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted"
+      ],
+      "urls": {
+        "token": "/token/sweetums.png",
+        "icon": "/icon/sweetums.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Sweetums"
+      }
+    },
+    {
       "id": "tealady",
       "name": "Tea Lady",
       "type": "townsfolk",
@@ -1067,6 +1357,33 @@
         "token": "/token/tealady.png",
         "icon": "/icon/tealady.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Tea Lady"
+      }
+    },
+    {
+      "id": "technician",
+      "name": "Technician",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/technician.png",
+        "icon": "/icon/technician.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Technician"
+      }
+    },
+    {
+      "id": "thegreatgonzo",
+      "name": "The Great Gonzo",
+      "type": "townsfolk",
+      "edition": "Muppets",
+      "ability": "Each night*, you may choose a player: if you choose a minion they die, if you choose a townsfolk you die.",
+      "otherNightReminder": "Gonzo chooses a player.",
+      "reminderTokens": [
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/thegreatgonzo.png",
+        "icon": "/icon/thegreatgonzo.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/The Great Gonzo"
       }
     },
     {
@@ -1108,6 +1425,17 @@
       }
     },
     {
+      "id": "villageidiot",
+      "name": "Village Idiot",
+      "type": "townsfolk",
+      "ability": "",
+      "urls": {
+        "token": "/token/villageidiot.png",
+        "icon": "/icon/villageidiot.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Village Idiot"
+      }
+    },
+    {
       "id": "virgin",
       "name": "Virgin",
       "type": "townsfolk",
@@ -1139,23 +1467,6 @@
         "token": "/token/washerwoman.png",
         "icon": "/icon/washerwoman.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Washerwoman"
-      }
-    },
-    {
-      "id": "acrobat",
-      "name": "Acrobat",
-      "type": "outsider",
-      "ability": "Each night*, if either good living neighbour is drunk or poisoned, you die.",
-      "otherNight": 39,
-      "otherNightReminder": "If a good living neighbour is drunk or poisoned, the Acrobat player dies.",
-      "reminderTokens": [
-        "Dead"
-      ],
-      "urls": {
-        "interactions": "/interactions/acrobat",
-        "token": "/token/acrobat.png",
-        "icon": "/icon/acrobat.png",
-        "wiki": "https://wiki.bloodontheclocktower.com/Acrobat"
       }
     },
     {
@@ -1206,6 +1517,18 @@
         "token": "/token/butler.png",
         "icon": "/icon/butler.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Butler"
+      }
+    },
+    {
+      "id": "cameraman",
+      "name": "Cameraman",
+      "type": "outsider",
+      "edition": "Muppets",
+      "ability": "If you commmunicate verbally on day 1, a townsfolk might become human immediately.",
+      "urls": {
+        "token": "/token/cameraman.png",
+        "icon": "/icon/cameraman.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Cameraman"
       }
     },
     {
@@ -1275,6 +1598,17 @@
       }
     },
     {
+      "id": "hatter",
+      "name": "Hatter",
+      "type": "outsider",
+      "ability": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+      "urls": {
+        "token": "/token/hatter.png",
+        "icon": "/icon/hatter.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Hatter"
+      }
+    },
+    {
       "id": "heretic",
       "name": "Heretic",
       "type": "outsider",
@@ -1284,6 +1618,46 @@
         "token": "/token/heretic.png",
         "icon": "/icon/heretic.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Heretic"
+      }
+    },
+    {
+      "id": "human",
+      "name": "Human",
+      "type": "outsider",
+      "edition": "Muppets",
+      "ability": "You do not know you are a Human. You think you are a Townsfolk character, but you are not.",
+      "otherNightReminder": "Treat them as if they were the character they think they are, but human.",
+      "globalReminderTokens": [
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human",
+        "Human"
+      ],
+      "urls": {
+        "token": "/token/human.png",
+        "icon": "/icon/human.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Human"
+      }
+    },
+    {
+      "id": "josser",
+      "name": "Josser",
+      "type": "outsider",
+      "urls": {
+        "token": "/token/josser.png",
+        "icon": "/icon/josser.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Josser"
       }
     },
     {
@@ -1297,6 +1671,36 @@
         "token": "/token/klutz.png",
         "icon": "/icon/klutz.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Klutz"
+      }
+    },
+    {
+      "id": "longjohnsilver",
+      "name": "Long John Silver",
+      "type": "outsider",
+      "edition": "Muppets",
+      "ability": "Each night*, one player who voted on you that day might die, even if you are dead.",
+      "reminderTokens": [
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Voted",
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/longjohnsilver.png",
+        "icon": "/icon/longjohnsilver.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Long John Silver"
       }
     },
     {
@@ -1320,6 +1724,17 @@
         "token": "/token/lunatic.png",
         "icon": "/icon/lunatic.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Lunatic"
+      }
+    },
+    {
+      "id": "maverick",
+      "name": "Maverick",
+      "type": "outsider",
+      "ability": "",
+      "urls": {
+        "token": "/token/maverick.png",
+        "icon": "/icon/maverick.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Maverick"
       }
     },
     {
@@ -1351,6 +1766,28 @@
         "token": "/token/mutant.png",
         "icon": "/icon/mutant.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Mutant"
+      }
+    },
+    {
+      "id": "ogre",
+      "name": "Ogre",
+      "type": "outsider",
+      "ability": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+      "urls": {
+        "token": "/token/ogre.png",
+        "icon": "/icon/ogre.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Ogre"
+      }
+    },
+    {
+      "id": "plaguedoctor",
+      "name": "Plague Doctor",
+      "type": "outsider",
+      "ability": "",
+      "urls": {
+        "token": "/token/plaguedoctor.png",
+        "icon": "/icon/plaguedoctor.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Plague Doctor"
       }
     },
     {
@@ -1406,6 +1843,63 @@
         "token": "/token/saint.png",
         "icon": "/icon/saint.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Saint"
+      }
+    },
+    {
+      "id": "scrooge",
+      "name": "Scrooge",
+      "type": "outsider",
+      "edition": "Muppets",
+      "ability": "At night, if a player chooses another player, they might target you instead.",
+      "reminderTokens": [
+        "Scrooged"
+      ],
+      "urls": {
+        "token": "/token/scrooge.png",
+        "icon": "/icon/scrooge.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Scrooge"
+      }
+    },
+    {
+      "id": "showman",
+      "name": "Showman",
+      "type": "outsider",
+      "urls": {
+        "token": "/token/showman.png",
+        "icon": "/icon/showman.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Showman"
+      }
+    },
+    {
+      "id": "skeptic",
+      "name": "Skeptic",
+      "type": "outsider",
+      "urls": {
+        "token": "/token/skeptic.png",
+        "icon": "/icon/skeptic.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Skeptic"
+      }
+    },
+    {
+      "id": "skeptic",
+      "name": "Skeptic",
+      "type": "outsider",
+      "ability": "There is a non-listed character in-play. [1 evil player is that character]",
+      "urls": {
+        "token": "/token/skeptic.png",
+        "icon": "/icon/skeptic.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Skeptic"
+      }
+    },
+    {
+      "id": "sloth",
+      "name": "Sloth",
+      "type": "outsider",
+      "ability": "If you are the only good player alive, you become evil.",
+      "urls": {
+        "token": "/token/sloth.png",
+        "icon": "/icon/sloth.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Sloth"
       }
     },
     {
@@ -1469,6 +1963,34 @@
       }
     },
     {
+      "id": "zealot",
+      "name": "Zealot",
+      "type": "outsider",
+      "ability": "",
+      "urls": {
+        "token": "/token/zealot.png",
+        "icon": "/icon/zealot.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Zealot"
+      }
+    },
+    {
+      "id": "animal",
+      "name": "Animal",
+      "type": "minion",
+      "edition": "Muppets",
+      "ability": "Once per game at night*, choose a player: they die, if you were nonverbal on day 1, 1 of their Townsfolk neighbours becomes human.",
+      "otherNightReminder": "Does Animal want to use it? If yes, Animal chooses a player.",
+      "reminderTokens": [
+        "Non-verbal",
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/animal.png",
+        "icon": "/icon/animal.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Animal"
+      }
+    },
+    {
       "id": "arburri",
       "name": "Arburri",
       "type": "minion",
@@ -1513,6 +2035,33 @@
       }
     },
     {
+      "id": "bilgerat",
+      "name": "Bilge Rat",
+      "type": "minion",
+      "ability": "Outsiders poison Townsfolk they nominate until dawn. [Exactly 3 Outsiders]",
+      "reminderTokens": [
+        "Poisoned",
+        "Poisoned",
+        "Poisoned"
+      ],
+      "urls": {
+        "token": "/token/bilgerat.png",
+        "icon": "/icon/bilgerat.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Bilge Rat"
+      }
+    },
+    {
+      "id": "boffin",
+      "name": "Boffin",
+      "type": "minion",
+      "ability": "The Demon (even if drunk or poisoned) has a not-in-play good character's ability. You both know which.",
+      "urls": {
+        "token": "/token/boffin.png",
+        "icon": "/icon/boffin.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Boffin"
+      }
+    },
+    {
       "id": "boomdandy",
       "name": "Boomdandy",
       "type": "minion",
@@ -1542,6 +2091,47 @@
         "token": "/token/cerenovus.png",
         "icon": "/icon/cerenovus.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Cerenovus"
+      }
+    },
+    {
+      "id": "constantine",
+      "name": "Constantine",
+      "type": "minion",
+      "edition": "Muppets",
+      "ability": "Each night* you may choose 2 players (not the demon), they swap characters, abilities do not refresh. You register as good, and as Kermit, even if dead.",
+      "otherNightReminder": "Constanine selects two players (not the demon).",
+      "urls": {
+        "token": "/token/constantine.png",
+        "icon": "/icon/constantine.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Constantine"
+      }
+    },
+    {
+      "id": "crazyharry",
+      "name": "Crazy Harry",
+      "type": "minion",
+      "edition": "Muppets",
+      "ability": "Each night choose a player, the first outsider you choose becomes evil, you learn this. [+1 outsider]",
+      "firstNightReminder": "Crazy Harry selects a player. Nod the first time they select an outsider.",
+      "otherNightReminder": "Crazy Harry selects a player. Nod the first time they select an outsider.",
+      "reminderTokens": [
+        "Turns Evil"
+      ],
+      "urls": {
+        "token": "/token/crazyharry.png",
+        "icon": "/icon/crazyharry.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Crazy Harry"
+      }
+    },
+    {
+      "id": "cupid",
+      "name": "Cupid",
+      "type": "minion",
+      "ability": "",
+      "urls": {
+        "token": "/token/cupid.png",
+        "icon": "/icon/cupid.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Cupid"
       }
     },
     {
@@ -1601,6 +2191,16 @@
       }
     },
     {
+      "id": "gargoyle",
+      "name": "Gargoyle",
+      "type": "minion",
+      "urls": {
+        "token": "/token/gargoyle.png",
+        "icon": "/icon/gargoyle.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Gargoyle"
+      }
+    },
+    {
       "id": "goblin",
       "name": "Goblin",
       "type": "minion",
@@ -1642,11 +2242,22 @@
       "id": "harpy",
       "name": "Harpy",
       "type": "minion",
-      "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or both might die.",
+      "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or one or both might die.",
       "urls": {
         "token": "/token/harpy.png",
         "icon": "/icon/harpy.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Harpy"
+      }
+    },
+    {
+      "id": "mammajamma",
+      "name": "Mammajamma",
+      "type": "minion",
+      "ability": "",
+      "urls": {
+        "token": "/token/mammajamma.png",
+        "icon": "/icon/mammajamma.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Mammajamma"
       }
     },
     {
@@ -1800,6 +2411,22 @@
       }
     },
     {
+      "id": "scooter",
+      "name": "Scooter",
+      "type": "minion",
+      "edition": "Muppets",
+      "ability": "Once per day you may choose to take one player off the block. If just 3 players live you lose this ability.",
+      "reminderTokens": [
+        "Used today",
+        "No ability"
+      ],
+      "urls": {
+        "token": "/token/scooter.png",
+        "icon": "/icon/scooter.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Scooter"
+      }
+    },
+    {
       "id": "spy",
       "name": "Spy",
       "type": "minion",
@@ -1815,6 +2442,17 @@
         "token": "/token/spy.png",
         "icon": "/icon/spy.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Spy"
+      }
+    },
+    {
+      "id": "summoner",
+      "name": "Summoner",
+      "type": "minion",
+      "ability": "You get 3 bluffs. On the 3rd night, choose a player: they become an evil Demon of your choice. [No Demon]",
+      "urls": {
+        "token": "/token/summoner.png",
+        "icon": "/icon/summoner.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Summoner"
       }
     },
     {
@@ -1866,6 +2504,28 @@
         "token": "/token/witch.png",
         "icon": "/icon/witch.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Witch"
+      }
+    },
+    {
+      "id": "wizard",
+      "name": "Wizard",
+      "type": "minion",
+      "ability": "Once per game, choose to make a wish. If granted, it might have a price and leave a clue as to its nature.",
+      "urls": {
+        "token": "/token/wizard.png",
+        "icon": "/icon/wizard.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Wizard"
+      }
+    },
+    {
+      "id": "xaan",
+      "name": "Xaan",
+      "type": "minion",
+      "ability": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]",
+      "urls": {
+        "token": "/token/xaan.png",
+        "icon": "/icon/xaan.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Xaan"
       }
     },
     {
@@ -1936,6 +2596,17 @@
         "token": "/token/imp.png",
         "icon": "/icon/imp.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Imp"
+      }
+    },
+    {
+      "id": "kazali",
+      "name": "Kazali",
+      "type": "demon",
+      "ability": "Each night*, choose a player: they die. [You choose which players are Minions. -? to +? Outsiders]",
+      "urls": {
+        "token": "/token/kazali.png",
+        "icon": "/icon/kazali.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Kazali"
       }
     },
     {
@@ -2023,6 +2694,16 @@
       }
     },
     {
+      "id": "lordoftyphon",
+      "name": "Lord of Typhon",
+      "type": "demon",
+      "urls": {
+        "token": "/token/lordoftyphon.png",
+        "icon": "/icon/lordoftyphon.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Lord of Typhon"
+      }
+    },
+    {
       "id": "malopcion",
       "name": "Mal-Opción",
       "type": "demon",
@@ -2031,6 +2712,33 @@
         "token": "/token/malopcion.png",
         "icon": "/icon/malopcion.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Mal-Opción"
+      }
+    },
+    {
+      "id": "midnight",
+      "name": "Midnight",
+      "type": "demon",
+      "urls": {
+        "token": "/token/midnight.png",
+        "icon": "/icon/midnight.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Midnight"
+      }
+    },
+    {
+      "id": "misspiggy",
+      "name": "Miss Piggy",
+      "type": "demon",
+      "edition": "Muppets",
+      "ability": "Each night*, choose a player: they die. Townsfolk chosen by Kermit become humans instead. [+ Kermit]",
+      "otherNightReminder": "Miss Piggy chooses a player",
+      "reminderTokens": [
+        "Died tonight",
+        "Corrupted"
+      ],
+      "urls": {
+        "token": "/token/misspiggy.png",
+        "icon": "/icon/misspiggy.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Miss Piggy"
       }
     },
     {
@@ -2050,6 +2758,17 @@
         "token": "/token/nodashii.png",
         "icon": "/icon/nodashii.png",
         "wiki": "https://wiki.bloodontheclocktower.com/No Dashii"
+      }
+    },
+    {
+      "id": "ojo",
+      "name": "Ojo",
+      "type": "demon",
+      "ability": "",
+      "urls": {
+        "token": "/token/ojo.png",
+        "icon": "/icon/ojo.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Ojo"
       }
     },
     {
@@ -2104,6 +2823,16 @@
       }
     },
     {
+      "id": "schai",
+      "name": "Schai",
+      "type": "demon",
+      "urls": {
+        "token": "/token/schai.png",
+        "icon": "/icon/schai.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Schai"
+      }
+    },
+    {
       "id": "shabaloth",
       "name": "Shabaloth",
       "type": "demon",
@@ -2119,6 +2848,38 @@
         "token": "/token/shabaloth.png",
         "icon": "/icon/shabaloth.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Shabaloth"
+      }
+    },
+    {
+      "id": "statler",
+      "name": "Statler",
+      "type": "demon",
+      "edition": "Muppets",
+      "ability": "Each night*, wake with Waldorf, together choose one player: they die.[+ Waldorf, -1 minion]",
+      "otherNightReminder": "Wake with Waldorf: choose a player.",
+      "reminderTokens": [
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/statler.png",
+        "icon": "/icon/statler.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Statler"
+      }
+    },
+    {
+      "id": "uncledeadly",
+      "name": "Uncle Deadly",
+      "type": "demon",
+      "edition": "Muppets",
+      "ability": "Each night*, choose a player: they die. Townsfolk who nominate you become Human.",
+      "otherNightReminder": "Uncle Deadly chooses a player.",
+      "reminderTokens": [
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/uncledeadly.png",
+        "icon": "/icon/uncledeadly.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Uncle Deadly"
       }
     },
     {
@@ -2171,6 +2932,33 @@
       }
     },
     {
+      "id": "waldorf",
+      "name": "Waldorf",
+      "type": "demon",
+      "edition": "Muppets",
+      "ability": "Each night*, wake with Statler, together choose one player: they die.[+ Statler]",
+      "otherNightReminder": "Wake with Statler: choose a player.",
+      "reminderTokens": [
+        "Died tonight"
+      ],
+      "urls": {
+        "token": "/token/waldorf.png",
+        "icon": "/icon/waldorf.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Waldorf"
+      }
+    },
+    {
+      "id": "yaggababble",
+      "name": "Yaggababble",
+      "type": "demon",
+      "ability": "",
+      "urls": {
+        "token": "/token/yaggababble.png",
+        "icon": "/icon/yaggababble.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Yaggababble"
+      }
+    },
+    {
       "id": "zombuul",
       "name": "Zombuul",
       "type": "demon",
@@ -2187,6 +2975,18 @@
         "token": "/token/zombuul.png",
         "icon": "/icon/zombuul.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Zombuul"
+      }
+    },
+    {
+      "id": "manormuppet",
+      "name": "Am I Man or Muppet?",
+      "type": "fabled",
+      "edition": "Muppets",
+      "ability": "If a Townsfolk is turned into a Human they are not told of the change. If a Human is turned into a Townsfolk they are not told and become the Townsfolk they believe themselves to be.",
+      "urls": {
+        "token": "/token/manormuppet.png",
+        "icon": "/icon/manormuppet.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Am I Man or Muppet?"
       }
     },
     {
@@ -2307,6 +3107,18 @@
         "token": "/token/hellslibrarian.png",
         "icon": "/icon/hellslibrarian.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Hell's Librarian"
+      }
+    },
+    {
+      "id": "nonverbal",
+      "name": "Non-Verbal",
+      "type": "fabled",
+      "edition": "Muppets",
+      "ability": "Communicating without real words. Gestures, noises, and pointing (and names when online) all count as non-verbal.",
+      "urls": {
+        "token": "/token/nonverbal.png",
+        "icon": "/icon/nonverbal.png",
+        "wiki": "https://wiki.bloodontheclocktower.com/Non-Verbal"
       }
     },
     {
@@ -2628,12 +3440,6 @@
         "icon": "/icon/voudon.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Voudon"
       }
-    },
-    {
-      "id": "plague_doctor",
-      "name": "Plague Doctor",
-      "type": "outsider",
-      "ability": "If you die, the Storyteller gains a not-in-play Minion ability."
     }
   ]
 }
