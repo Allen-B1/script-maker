@@ -8,7 +8,17 @@
 
     type CharType = "townsfolk" | "outsider" | "minion" | "demon" | "traveler" | "fabled";
 
-    type Role = { id: string, name: string, edition: string, type: CharType, ability: string, firstNight?: number, otherNight?: number, image: string };
+    type Role = { 
+        id: string,
+        name: string,
+        edition: string,
+        type: CharType,
+        
+        ability: string,
+        firstNight?: number,
+        otherNight?: number,
+        
+        image: string };
 
     const BASE_EDITIONS = new Set(["tb", "snv", "bmr", "exp"]);
     function isHomebrew(role: Role): boolean {
@@ -49,7 +59,6 @@
         });
     }
     for (let role of anthRoles) {
-        let raw_role_id = role.id.slice(0, -"_the_bootleggers_anthology".length);
         roles.push({
             id: role.id,
             name: role.name,
@@ -59,7 +68,7 @@
             ability: role.ability,
             firstNight: role.firstNight,
             otehrNight: role.otherNight,
-            image: "/anth/" + raw_role_id + ".png"
+            image: "/anth/" + role.id + ".png"
         });
     }
 
@@ -357,10 +366,11 @@ main {
 .character.active {
     background: hsl(200, 50%, 85%); }
 .character img {
-    width: 32px; }
-.character img.anth {
     width: 24px;
-    padding: 0 4px; }
+padding: 0 4px; }
+.character img.anth {
+    width: 32px;
+    padding: 0; }
 .character img.obscrul {
     width: 16px;
     padding: 0 8px; }
@@ -399,14 +409,16 @@ main {
     cursor: default;
 }
 .script-role > img {
-    width: 4vh;
+    width: 3.5vh;
     margin-right: 0.5vh;
-
+    margin-left: -0.5vh;
+    padding: 0 0.75vh;
+    
     cursor: pointer;
 }
 .script-role > img.anth {
-    width: 3vh;
-    padding: 0 0.5vh; }
+    width: 5vh;
+    padding: 0; }
 .script-role > img.obscrul {
     width: 2vh;
     padding: 0 1vh;
@@ -426,16 +438,16 @@ main {
     flex-direction: row;
     align-items: center;
 
-    bottom: -0.375vh;
-    left: 6vh;
+    bottom: -0.75vh;
+    left: 6.5vh;
     z-index: 1;
 }
 .script-role-jinxes img {
     width: 2vh;
-    margin-right: -0.1vh;
 }
-.script-role-jinxes img.anth { width: 1.5vh; }
-.script-role-jinxes img.obscrul { width: 1vh; }
+.script-role-jinxes img.anth {
+    width: 3vh;
+}
 
 .script-type-divider {
     position: relative;
@@ -612,7 +624,7 @@ button {
                     on:dragover={(ev) => ev.preventDefault()}>
                     <img src={role.image} class:homebrew={isHomebrew(role)}
                         title={"Remove " + role.name}
-                        class:anth={role.edition == "anth"} class:obscrul={role.id == "obscrul_the_bootleggers_anthology"}
+                        class:anth={role.edition == "anth"}
                         on:click={() => {script.splice(idx, 1); script=script}} alt={"Remove " + role.name} role="button">
                     <span class="script-role-name"
                         style={"letter-spacing: " + calculateLetterSpacing(role.name + (isHomebrew(role) ? "†" : "") + (meta.marked == role.id && hasVessel ? " 🕱" : ""), 7.25)}
