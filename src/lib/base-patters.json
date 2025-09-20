@@ -3440,6 +3440,13 @@
         "icon": "/icon/voudon.png",
         "wiki": "https://wiki.bloodontheclocktower.com/Voudon"
       }
-    }
+    },
+
+    {
+      "id": "hermit",
+      "name": "Hermit",
+      "type": "outsider",
+      "ability": "You have all Outsider abilities. [-0 or -1 Outsider]"
+   }
   ]
 }
